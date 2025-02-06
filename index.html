@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galerie Avancée</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>MediaHub - Galerie Avancée</title>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/favicon.ico">
 </head>
 <body>
 
@@ -33,17 +34,6 @@
         <option value="neon">Néon</option>
       </select>
     </label>
-    <label>
-      Affichage :
-      <select id="display-mode">
-        <option value="grid">Grille</option>
-        <option value="list">Liste</option>
-      </select>
-    </label>
-    <label>
-      Animations :
-      <input type="checkbox" id="animations-toggle" checked> Activer les animations
-    </label>
   </section>
 
   <!-- Recherche -->
@@ -53,7 +43,7 @@
     <button id="search-btn">Rechercher</button>
   </section>
 
-  <!-- Galerie Photos et Vidéos -->
+  <!-- Galerie -->
   <section id="photos">
     <h2>Galerie de Photos</h2>
     <div class="gallery" id="photo-gallery"></div>
@@ -64,11 +54,10 @@
     <div class="gallery" id="video-gallery"></div>
   </section>
 
-  <!-- Ajouter Média -->
+  <!-- Ajouter un Média -->
   <section id="upload">
-    <h2>Ajouter une Photo ou Vidéo</h2>
+    <h2>Ajouter un Média</h2>
     <form id="upload-form">
-      <label for="file-input">Choisir un fichier :</label>
       <input type="file" id="file-input" accept="image/*, video/*">
       <button type="submit">Ajouter</button>
     </form>
@@ -85,6 +74,6 @@
     <p>© 2025 MediaHub - Créé avec passion.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
