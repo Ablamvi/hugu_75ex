@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie Avancée</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <h1>MediaHub</h1>
+    <ul>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#videos">Vidéos</a></li>
+      <li><a href="#upload">Ajouter</a></li>
+      <li><a href="#settings">Paramètres</a></li>
+      <li><a href="#statistics">Statistiques</a></li>
+    </ul>
+    <button id="theme-toggle">🌙</button>
+  </nav>
+
+  <!-- Paramètres -->
+  <section id="settings">
+    <h2>Paramètres</h2>
+    <label>
+      Thème :
+      <select id="theme-selector">
+        <option value="light">Clair</option>
+        <option value="dark">Sombre</option>
+        <option value="neon">Néon</option>
+      </select>
+    </label>
+    <label>
+      Affichage :
+      <select id="display-mode">
+        <option value="grid">Grille</option>
+        <option value="list">Liste</option>
+      </select>
+    </label>
+    <label>
+      Animations :
+      <input type="checkbox" id="animations-toggle" checked> Activer les animations
+    </label>
+  </section>
+
+  <!-- Recherche -->
+  <section id="search">
+    <h2>Recherche Avancée</h2>
+    <input type="text" id="search-input" placeholder="Rechercher un média">
+    <button id="search-btn">Rechercher</button>
+  </section>
+
+  <!-- Galerie Photos et Vidéos -->
+  <section id="photos">
+    <h2>Galerie de Photos</h2>
+    <div class="gallery" id="photo-gallery"></div>
+  </section>
+
+  <section id="videos">
+    <h2>Galerie de Vidéos</h2>
+    <div class="gallery" id="video-gallery"></div>
+  </section>
+
+  <!-- Ajouter Média -->
+  <section id="upload">
+    <h2>Ajouter une Photo ou Vidéo</h2>
+    <form id="upload-form">
+      <label for="file-input">Choisir un fichier :</label>
+      <input type="file" id="file-input" accept="image/*, video/*">
+      <button type="submit">Ajouter</button>
+    </form>
+  </section>
+
+  <!-- Statistiques -->
+  <section id="statistics">
+    <h2>Statistiques</h2>
+    <p id="most-viewed">Média le plus consulté : Aucune donnée</p>
+    <p id="most-downloaded">Média le plus téléchargé : Aucune donnée</p>
+  </section>
+
+  <footer>
+    <p>© 2025 MediaHub - Créé avec passion.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
