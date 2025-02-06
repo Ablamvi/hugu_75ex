@@ -1,0 +1,120 @@
+/* Styles de base */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  text-align: center;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#theme-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Paramètres */
+#settings {
+  margin-top: 80px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Statistiques */
+#statistics {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], input[type="file"] {
+  padding: 10px;
+  margin-right: 10px;
+  width: 80%;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Galerie */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gallery img, .gallery video {
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.gallery img:hover, .gallery video:hover {
+  transform: scale(1.05);
+}
+
+/* Thèmes */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.dark-mode nav {
+  background-color: #333;
+}
+
+.dark-mode .gallery img, .dark-mode .gallery video {
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.neon-mode {
+  background-color: #000;
+  color: #0f0;
+}
+
+.neon-mode nav {
+  background-color: #111;
+}
+
+.neon-mode button {
+  background-color: #0f0;
+  color: #000;
+}
