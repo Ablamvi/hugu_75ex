@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("DOM chargé");
+
+  const themeSelector = document.getElementById("theme-selector");
+  const displayMode = document.getElementById("display-mode");
+  const searchBtn = document.getElementById("search-btn");
+  const fileInput = document.getElementById("file-input");
+
+  if (!themeSelector || !displayMode || !searchBtn || !fileInput) {
+    console.error("Un ou plusieurs éléments ne sont pas trouvés !");
+  }
+});
+document.addEventListener("DOMContentLoaded", function () {
   const themeSelector = document.getElementById("theme-selector");
   const displayMode = document.getElementById("display-mode");
   const animationsToggle = document.getElementById("animations-toggle");
