@@ -3,36 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Bord - Mini-Jeux</title>
+    <title>Tableau de Bord Futuriste</title>
     <style>
-        /* Styles généraux */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        /* Styles de base */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { display: flex; background: #1e1e2e; color: white; transition: 0.3s; }
-        .light-mode { background: #f0f0f0; color: black; }
-        
+        body.light-mode { background: #f4f4f4; color: black; }
+
         /* Barre latérale */
-        .sidebar { width: 250px; height: 100vh; background: #12121c; padding: 20px; display: flex; flex-direction: column; }
-        .sidebar h2 { text-align: center; margin-bottom: 20px; color: #0ff; }
-        .menu { list-style: none; flex: 1; }
-        .menu li { padding: 15px; cursor: pointer; transition: 0.3s; color: #ddd; text-align: center; border-bottom: 1px solid #222; }
-        .menu li:hover { background: #0ff; color: #000; }
+        .sidebar { width: 250px; height: 100vh; background: #12121c; padding: 20px; }
+        .sidebar h2 { text-align: center; margin-bottom: 20px; }
+        .menu { list-style: none; }
+        .menu li { padding: 15px; cursor: pointer; transition: 0.3s; }
+        .menu li:hover { background: #333; }
 
         /* Contenu principal */
-        .main-content { flex: 1; padding: 20px; display: flex; justify-content: center; align-items: center; }
-        .section { display: none; text-align: center; }
+        .main-content { flex: 1; padding: 20px; }
+        .section { display: none; }
         .section.active { display: block; }
 
-        /* Jeux */
-        .game-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .game-card { width: 150px; height: 150px; background: #222; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; cursor: pointer; transition: 0.3s; }
-        .game-card:hover { background: #0ff; color: #000; }
-
-        /* Mode sombre & clair */
-        .toggle-container { text-align: center; margin-top: 20px; }
-        .toggle-button { padding: 10px 20px; cursor: pointer; background: #0ff; border: none; border-radius: 5px; color: black; transition: 0.3s; }
-        .toggle-button:hover { background: #06c; color: white; }
-
-        /* Canvas pour les jeux */
+        /* Paramètres */
+        .settings { background: #29293d; padding: 20px; border-radius: 10px; }
+        .toggle-dark { cursor: pointer; background: #444; padding: 10px; border-radius: 5px; text-align: center; }
+        
+        /* Styles des jeux */
+        .game-container { text-align: center; margin-top: 20px; }
+        button { padding: 10px 20px; margin: 10px; cursor: pointer; }
+        input { padding: 10px; margin: 10px; }
         canvas { background: black; display: block; margin: auto; }
     </style>
 </head>
@@ -40,11 +37,11 @@
 
     <!-- Barre latérale -->
     <div class="sidebar">
-        <h2>Dashboard</h2>
+        <h2>Mon Site</h2>
         <ul class="menu">
             <li onclick="showSection('home')">Accueil</li>
             <li onclick="showSection('games')">Mini-Jeux</li>
-            <li onclick="toggleTheme()">🌙/☀️ Mode</li>
+            <li onclick="showSection('settings')">Paramètres</li>
         </ul>
     </div>
 
@@ -52,104 +49,116 @@
     <div class="main-content">
         <div id="home" class="section active">
             <h1>Bienvenue</h1>
-            <p>Interface futuriste avec plusieurs mini-jeux.</p>
+            <p>Voici un site moderne et futuriste.</p>
         </div>
 
         <div id="games" class="section">
             <h1>Mini-Jeux</h1>
             <div class="game-container">
-                <div class="game-card" onclick="startGame('guessGame')">Devine le Nombre</div>
-                <div class="game-card" onclick="startGame('rpsGame')">Pierre-Papier-Ciseaux</div>
-                <div class="game-card" onclick="startGame('quizGame')">Quiz</div>
-                <div class="game-card" onclick="startGame('snakeGame')">Snake</div>
-                <div class="game-card" onclick="startGame('pongGame')">Pong</div>
+                <h2>Devine le Nombre</h2>
+                <p>Devinez un nombre entre 1 et 100.</p>
+                <input type="number" id="guess" placeholder="Entrez un nombre">
+                <button onclick="checkGuess()">Valider</button>
+                <p id="guess-result"></p>
+            </div>
+
+            <div class="game-container">
+                <h2>Pierre-Papier-Ciseaux</h2>
+                <button onclick="playGame('pierre')">Pierre</button>
+                <button onclick="playGame('papier')">Papier</button>
+                <button onclick="playGame('ciseaux')">Ciseaux</button>
+                <p id="rps-result"></p>
+            </div>
+
+            <div class="game-container">
+                <h2>Snake</h2>
+                <canvas id="snakeGame" width="300" height="300"></canvas>
             </div>
         </div>
 
-        <!-- Devine le nombre -->
-        <div id="guessGame" class="section">
-            <h1>Devinez un nombre entre 1 et 10</h1>
-            <input id="guessInput" type="number" min="1" max="10">
-            <button onclick="checkGuess()">Deviner</button>
-            <p id="guessResult" style="color: #0ff; display: none;">Gagné !</p>
-        </div>
-
-        <!-- Pierre-Papier-Ciseaux -->
-        <div id="rpsGame" class="section">
-            <h1>Pierre-Papier-Ciseaux</h1>
-            <button onclick="playRPS('pierre')">🪨 Pierre</button>
-            <button onclick="playRPS('papier')">📜 Papier</button>
-            <button onclick="playRPS('ciseaux')">✂️ Ciseaux</button>
-            <p id="rpsResult"></p>
-        </div>
-
-        <!-- Quiz -->
-        <div id="quizGame" class="section">
-            <h1>Quiz</h1>
-            <p>Quelle est la capitale de la France ?</p>
-            <button onclick="checkQuiz('Paris')">Paris</button>
-            <button onclick="checkQuiz('Londres')">Londres</button>
-            <p id="quizResult"></p>
-        </div>
-
-        <!-- Snake -->
-        <div id="snakeGame" class="section">
-            <h1>Snake</h1>
-            <canvas id="snakeCanvas" width="400" height="400"></canvas>
-        </div>
-
-        <!-- Pong -->
-        <div id="pongGame" class="section">
-            <h1>Pong</h1>
-            <canvas id="pongCanvas" width="500" height="300"></canvas>
+        <div id="settings" class="section">
+            <h1>Paramètres</h1>
+            <div class="settings">
+                <div class="toggle-dark" onclick="toggleTheme()">Changer le Thème</div>
+            </div>
         </div>
     </div>
 
     <script>
+        // Changement de section
         function showSection(section) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(section).classList.add('active');
         }
 
+        // Changement de thème
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
         }
 
+        // Devine le Nombre
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
         function checkGuess() {
-            const guess = parseInt(document.getElementById('guessInput').value);
-            if (guess === Math.floor(Math.random() * 10) + 1) {
-                document.getElementById('guessResult').style.display = 'block';
+            let guess = parseInt(document.getElementById('guess').value);
+            let result = document.getElementById('guess-result');
+            if (guess < secretNumber) result.textContent = "Trop petit !";
+            else if (guess > secretNumber) result.textContent = "Trop grand !";
+            else result.textContent = "Bravo ! Vous avez trouvé !";
+        }
+
+        // Pierre-Papier-Ciseaux
+        function playGame(userChoice) {
+            let choices = ["pierre", "papier", "ciseaux"];
+            let computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result = document.getElementById('rps-result');
+            if (userChoice === computerChoice) result.textContent = "Égalité !";
+            else if ((userChoice === "pierre" && computerChoice === "ciseaux") ||
+                     (userChoice === "papier" && computerChoice === "pierre") ||
+                     (userChoice === "ciseaux" && computerChoice === "papier")) {
+                result.textContent = "Gagné !";
             } else {
-                alert('Essayez encore !');
+                result.textContent = "Perdu !";
             }
         }
 
-        function playRPS(choice) {
-            const choices = ['pierre', 'papier', 'ciseaux'];
-            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-            let result = '';
-            if (choice === computerChoice) {
-                result = "Égalité !";
-            } else if (
-                (choice === 'pierre' && computerChoice === 'ciseaux') ||
-                (choice === 'papier' && computerChoice === 'pierre') ||
-                (choice === 'ciseaux' && computerChoice === 'papier')
-            ) {
-                result = "Gagné !";
+        // Jeu Snake
+        let canvas = document.getElementById("snakeGame");
+        let ctx = canvas.getContext("2d");
+        let snake = [{ x: 10, y: 10 }];
+        let direction = "RIGHT";
+        let food = { x: Math.floor(Math.random() * 10) * 30, y: Math.floor(Math.random() * 10) * 30 };
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "ArrowUp") direction = "UP";
+            if (event.key === "ArrowDown") direction = "DOWN";
+            if (event.key === "ArrowLeft") direction = "LEFT";
+            if (event.key === "ArrowRight") direction = "RIGHT";
+        });
+
+        function updateGame() {
+            let head = { ...snake[0] };
+            if (direction === "UP") head.y -= 30;
+            if (direction === "DOWN") head.y += 30;
+            if (direction === "LEFT") head.x -= 30;
+            if (direction === "RIGHT") head.x += 30;
+            snake.unshift(head);
+            if (head.x === food.x && head.y === food.y) {
+                food = { x: Math.floor(Math.random() * 10) * 30, y: Math.floor(Math.random() * 10) * 30 };
             } else {
-                result = "Perdu !";
+                snake.pop();
             }
-            document.getElementById('rpsResult').innerText = `Ordi: ${computerChoice} - ${result}`;
         }
 
-        function checkQuiz(answer) {
-            if (answer === 'Paris') {
-                document.getElementById('quizResult').innerText = "Bonne réponse ! 🎉";
-            } else {
-                document.getElementById('quizResult').innerText = "Faux, essayez encore.";
-            }
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "green";
+            snake.forEach(part => ctx.fillRect(part.x, part.y, 30, 30));
+            ctx.fillStyle = "red";
+            ctx.fillRect(food.x, food.y, 30, 30);
         }
+
+        setInterval(() => { updateGame(); drawGame(); }, 200);
     </script>
 
 </body>
-</html>
+                  </html>
